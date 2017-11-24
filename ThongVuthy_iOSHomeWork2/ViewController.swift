@@ -21,6 +21,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         textFields = [usename, password, phonenumber , email]
         setUpTextFields()
+        
+        
        
     }
     
@@ -44,8 +46,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    
     func setUpTextFields() {
+        password.isSecureTextEntry = true
+        phonenumber.addTarget(self, action: #selector(textFieldValueDidChange), for: UIControlEvents.editingChanged)
+        
         for (index, textField) in textFields.enumerated() {
             textField.borderStyle = UITextBorderStyle.roundedRect
             textField.delegate = self
@@ -68,6 +72,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         phonenumber.leftView = codeCountryLabel
         phonenumber.leftViewMode = UITextFieldViewMode.always
         phonenumber.placeholder = "015-599-997"
+    }
+    
+    
+    @objc func textFieldValueDidChange(){
+       var numberString = phonenumber.text!
+        
     }
 }
 
