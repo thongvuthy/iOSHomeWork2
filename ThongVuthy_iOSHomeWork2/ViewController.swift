@@ -10,22 +10,26 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usename: UITextField!
-    @IBOutlet weak var button: UIButton!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var phonenumber: UITextField!
     var codeCountryLabel : UILabel!
     var textFields:[UITextField]!
     
+    @IBAction func signUpButtonClick(_ sender: Any) {
+        performSegue(withIdentifier: "sequez", sender: self)
+    }
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         textFields = [usename, password, phonenumber , email]
         setUpTextFields()
-        
-        
-       
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destVC : AnotherViewController = segue.destination as! AnotherViewController
+        destVC.data = usename.text!
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         for(index, currentTextField) in textFields.enumerated() {
@@ -49,11 +53,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if phonenumber === textField {
             let currentText = textField.text ?? ""
             guard let stringRange = Range(range, in: currentText) else { return true }
-            
             let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-            
             return updatedText.count <= 12
-            
         }
         return true
     }
