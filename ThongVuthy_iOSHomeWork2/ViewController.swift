@@ -45,6 +45,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if phonenumber === textField {
+            let currentText = textField.text ?? ""
+            guard let stringRange = Range(range, in: currentText) else { return true }
+            
+            let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+            
+            return updatedText.count <= 12
+            
+        }
+        return true
+    }
+    
     
     func setUpTextFields() {
         password.isSecureTextEntry = true
@@ -71,13 +84,58 @@ class ViewController: UIViewController, UITextFieldDelegate {
         codeCountryLabel.font = codeCountryLabel.font.withSize(16)
         phonenumber.leftView = codeCountryLabel
         phonenumber.leftViewMode = UITextFieldViewMode.always
-        phonenumber.placeholder = "015-599-997"
+        phonenumber.placeholder = "015-599-999-7"
     }
-    
+
     
     @objc func textFieldValueDidChange(){
-       var numberString = phonenumber.text!
-        
+        var temp = phonenumber.text!
+        for _ in temp {
+            if let i = temp.characters.index(of: "-") {
+                temp.remove(at: i)
+            }
+        }
+        phonenumber.text = formatPhoneNumber(charArray: temp)
+
     }
+    
+    
+    func formatPhoneNumber (charArray: String) -> String {
+        let original : [Character] = Array (charArray)
+        var chars : [Character] = Array (charArray)
+        var finishedValues = ""
+                repeat {
+                    if(chars.count >= 3) {
+                        var newChar = chars[...2]
+                        for _ in 0...2 {
+                            chars.remove(at: 0)
+                        }
+                        if chars.count > 3 {
+                            newChar += "-"
+                        }
+                        finishedValues += newChar
+                    }else if (chars.count == 2){
+                        finishedValues += chars[..<2]
+                    }else if (chars.count == 1) {
+                        finishedValues += chars[..<1]
+                    }
+                    
+                } while chars.count > 3
+        
+        
+        if !chars.isEmpty  {
+            if(original.count > 3) {
+                finishedValues += "-"
+                finishedValues += chars
+            }
+        }
+        
+        return finishedValues
+    }
+    
+    
+
+    
 }
+
 
