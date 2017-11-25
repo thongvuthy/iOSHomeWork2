@@ -31,6 +31,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
         destVC.data = usename.text!
     }
     
+    @IBAction func unwindSeque (_ sender : UIStoryboardSegue) {
+        
+        usename.text = ""; phonenumber.text = "" ; email.text = ""; password.text = ""
+        usename.placeholder = "Username"
+        phonenumber.placeholder = "(+855) 015-999-999-7"
+        email.placeholder = "example@gmail.com"
+        password.placeholder = "Password"
+        phonenumber.leftView = nil
+        phonenumber.leftViewMode = UITextFieldViewMode.always
+   
+       
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         for(index, currentTextField) in textFields.enumerated() {
             if currentTextField === textField {
@@ -96,7 +109,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 temp.remove(at: i)
             }
         }
-        phonenumber.text = formatPhoneNumber(charArray: temp)
+        phonenumber.text = self.formatPhoneNumber(charArray: temp)
 
     }
     

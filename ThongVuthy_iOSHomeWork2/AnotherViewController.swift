@@ -20,7 +20,8 @@ class AnotherViewController: UIViewController {
     }
 
     @IBAction func didGoBack(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        print("Go back")
+        
     }
     
     override func didReceiveMemoryWarning() {

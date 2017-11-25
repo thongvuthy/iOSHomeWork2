@@ -139,6 +139,7 @@
                                             </state>
                                             <connections>
                                                 <action selector="didGoBack:" destination="biU-Rh-MW3" eventType="touchUpInside" id="Bo6-lC-6gb"/>
+                                                <segue destination="aeg-Zb-EUd" kind="unwind" unwindAction="unwindSeque:" id="Yvk-hf-Ugq"/>
                                             </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="congrate1" translatesAutoresizingMaskIntoConstraints="NO" id="Nef-kx-VXb">
@@ -158,6 +159,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wZL-cS-NAI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="aeg-Zb-EUd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1037.5999999999999" y="132.68365817091455"/>
         </scene>
